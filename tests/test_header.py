@@ -30,7 +30,7 @@ class TestHeader:
         base_page.click_logo_scooter()
         base_page.check_redirected_from_logo_scooter()
 
-    @allure.title('Тест перехода с клика на кнопку Заказать')
+    @allure.title('Тест перехода с клика в хэдере на кнопку Заказать')
     @allure.description('Кликаем на кнопку **Заказать**, и проверяем \
                         что произошёл переход на страницу начала заказа')
     @allure.link(Urls.ORDER, name='Ожидаемый URL, на который должно произойти перенаправление')
@@ -43,7 +43,7 @@ class TestHeader:
     @allure.title('Тест появления поля поиска заказа с клика на кнопку Статус заказа')
     @allure.description('Кликаем на кнопку **Статус заказа**, и проверяем \
                         что появилось поле для поиска заказа по ID')
-    def test_click_button_status(self, webdriver: WebDriver, wait: WebDriverWait, arg: str):
+    def test_click_button_status(self, webdriver: WebDriver, wait: WebDriverWait):
         base_page = BasePage(webdriver, wait)
 
         base_page.click_button_status()

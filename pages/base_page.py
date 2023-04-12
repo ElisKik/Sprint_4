@@ -10,6 +10,7 @@ from data.urls import Urls
 from utils.custom_conditions import CustomConditions
 
 class BasePage:
+    button_accept_cookies = [By.ID, 'rcc-confirm-button']
     logo_yandex = [By.XPATH, './/a[starts-with(@class, "Header_LogoYandex")]']
     logo_scooter = [By.XPATH, './/a[starts-with(@class, "Header_LogoScooter")]']
     button_order = [By.XPATH, './/div[starts-with(@class, "Header_Nav")]/button[starts-with(@class, "Button_Button")]']
@@ -19,6 +20,10 @@ class BasePage:
     def __init__(self, webdriver: WebDriver, wait: WebDriverWait):
         self.webdriver = webdriver
         self.wait = wait
+
+    @allure.step('Клик на кнопку согласия на использование cookies')
+    def click_button_accept_cookies(self):
+        self.webdriver.find_element(*self.button_accept_cookies).click()
 
     @allure.step('Клик на лого Яндекса')
     def click_logo_yandex(self):
