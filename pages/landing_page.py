@@ -22,6 +22,12 @@ class LandingPage:
     text_faq_today_answer = [By.XPATH, './/div[contains(text(), "прямо на сегодня")]/../../div/p']
     container_faq_change_terms_question = [By.XPATH, './/div[contains(text(), "продлить заказ")]']
     text_faq_change_terms_answer = [By.XPATH, './/div[contains(text(), "продлить заказ")]/../../div/p']
+    container_faq_charging_question = [By.XPATH, './/div[contains(text(), "привозите зарядку")]']
+    text_faq_charging_answer = [By.XPATH, './/div[contains(text(), "привозите зарядку")]/../../div/p']
+    container_faq_cancel_question = [By.XPATH, './/div[contains(text(), "отменить заказ")]']
+    text_faq_cancel_answer = [By.XPATH, './/div[contains(text(), "отменить заказ")]/../../div/p']
+    container_faq_delivery_question = [By.XPATH, './/div[contains(text(), "за МКАДом")]']
+    text_faq_delivery_answer = [By.XPATH, './/div[contains(text(), "за МКАДом")]/../../div/p']
 
     def __init__(self, webdriver: WebDriver, wait: WebDriverWait):
         self.webdriver = webdriver
@@ -61,8 +67,26 @@ class LandingPage:
         element.click()
 
     @allure.step('Клик в FAQ по вопросу об изменениях срока аренды')
-    def click_question_change_terms(self):
+    def click_question_faq_change_terms(self):
         element = self.webdriver.find_element(*self.container_faq_change_terms_question)
+        self.wait.until(EC.element_to_be_clickable(element))
+        element.click()
+
+    @allure.step('Клик в FAQ по вопросу о зарядке')
+    def click_question_faq_charging(self):
+        element = self.webdriver.find_element(*self.container_faq_charging_question)
+        self.wait.until(EC.element_to_be_clickable(element))
+        element.click()
+
+    @allure.step('Клик в FAQ по вопросу об отмене заказа')
+    def click_question_faq_cancel(self):
+        element = self.webdriver.find_element(*self.container_faq_cancel_question)
+        self.wait.until(EC.element_to_be_clickable(element))
+        element.click()
+
+    @allure.step('Клик в FAQ по вопросу о доставке в область')
+    def click_question_faq_delivery(self):
+        element = self.webdriver.find_element(*self.container_faq_delivery_question)
         self.wait.until(EC.element_to_be_clickable(element))
         element.click()
 
@@ -114,6 +138,33 @@ class LandingPage:
         element = self.webdriver.find_element(*self.text_faq_change_terms_answer)
 
         expected_entry = 'если что-то срочное'
+        actual_text = element.text
+
+        assert expected_entry in actual_text, EqualityMismatch.contains(expected_entry, actual_text)
+
+    @allure.step('Проверка ответа в FAQ на вопрос о зарядке')
+    def check_answer_faq_charging(self):
+        element = self.webdriver.find_element(*self.text_faq_charging_answer)
+
+        expected_entry = 'Зарядка не понадобится'
+        actual_text = element.text
+
+        assert expected_entry in actual_text, EqualityMismatch.contains(expected_entry, actual_text)
+
+    @allure.step('Проверка ответа в FAQ на вопрос об отмене заказа')
+    def check_answer_faq_cancel(self):
+        element = self.webdriver.find_element(*self.text_faq_cancel_answer)
+
+        expected_entry = 'пока самокат не привезли'
+        actual_text = element.text
+
+        assert expected_entry in actual_text, EqualityMismatch.contains(expected_entry, actual_text)
+
+    @allure.step('Проверка ответа в FAQ на вопрос о доставке в область')
+    def check_answer_faq_delivery(self):
+        element = self.webdriver.find_element(*self.text_faq_delivery_answer)
+
+        expected_entry = 'И Москве, и Московской области'
         actual_text = element.text
 
         assert expected_entry in actual_text, EqualityMismatch.contains(expected_entry, actual_text)

@@ -85,5 +85,44 @@ class TestLanding:
 
         landing_page.scroll_to_faq()
 
-        landing_page.click_question_change_terms()
+        landing_page.click_question_faq_change_terms()
         landing_page.check_answer_faq_change_terms()
+
+    @allure.title('Тест FAQ: вопрос о зарядке')
+    @allure.description('Кликаем на вопрос и проверяем, что соседний элемент содержит ожидаемый ответ')
+    def test_faq_change_charging(self, webdriver: WebDriver, wait: WebDriverWait):
+        base_page = BasePage(webdriver, wait)
+        base_page.click_button_accept_cookies()
+
+        landing_page = LandingPage(webdriver, wait)
+
+        landing_page.scroll_to_faq()
+
+        landing_page.click_question_faq_charging()
+        landing_page.check_answer_faq_charging()
+
+    @allure.title('Тест FAQ: вопрос об отмене заказа')
+    @allure.description('Кликаем на вопрос и проверяем, что соседний элемент содержит ожидаемый ответ')
+    def test_faq_change_cancel(self, webdriver: WebDriver, wait: WebDriverWait):
+        base_page = BasePage(webdriver, wait)
+        base_page.click_button_accept_cookies()
+
+        landing_page = LandingPage(webdriver, wait)
+
+        landing_page.scroll_to_faq()
+
+        landing_page.click_question_faq_cancel()
+        landing_page.check_answer_faq_cancel()
+
+    @allure.title('Тест FAQ: вопрос об доставке в область')
+    @allure.description('Кликаем на вопрос и проверяем, что соседний элемент содержит ожидаемый ответ')
+    def test_faq_change_delivery(self, webdriver: WebDriver, wait: WebDriverWait):
+        base_page = BasePage(webdriver, wait)
+        base_page.click_button_accept_cookies()
+
+        landing_page = LandingPage(webdriver, wait)
+
+        landing_page.scroll_to_faq()
+
+        landing_page.click_question_faq_delivery()
+        landing_page.check_answer_faq_delivery()
