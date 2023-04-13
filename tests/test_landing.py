@@ -9,7 +9,6 @@ from pages.base_page import BasePage
 from pages.landing_page import LandingPage
 
 class TestLanding:
-
     @allure.title('Тест перехода с клика в лендинге на кнопку Заказать')
     @allure.description('Кликаем на кнопку **Заказать**, и проверяем \
                         что произошёл переход на страницу начала заказа')
@@ -19,6 +18,8 @@ class TestLanding:
         base_page.click_button_accept_cookies()
 
         landing_page = LandingPage(webdriver, wait)
+
+        landing_page.scroll_to_button_order()
 
         landing_page.click_button_order()
         landing_page.check_page_changed_on_button_order()

@@ -42,6 +42,11 @@ class LandingPage:
         element = self.webdriver.find_element(*self.container_faq)
         self.webdriver.execute_script("arguments[0].scrollIntoView();", element)
 
+    @allure.step('Скролл к кнопке Заказать')
+    def scroll_to_button_order(self):
+        element = self.webdriver.find_element(*self.button_order)
+        self.webdriver.execute_script("arguments[0].scrollIntoView();", element)
+
     @allure.step('Клик в FAQ по вопросу о цене')
     def click_question_faq_price(self):
         element = self.webdriver.find_element(*self.container_faq_price_question)

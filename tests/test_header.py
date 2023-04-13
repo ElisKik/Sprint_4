@@ -8,7 +8,6 @@ from data.urls import Urls
 from pages.base_page import BasePage
 
 class TestHeader:
-
     @allure.title('Тест перенаправления с клика на логотип Яндекса')
     @allure.description('Кликаем на логотип Яндекса, и проверяем \
                         что произошло перенаправление в любой из вкладок браузера')
