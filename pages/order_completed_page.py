@@ -1,0 +1,35 @@
+from re import match
+
+import allure
+
+from selenium.webdriver import Firefox as WebDriver
+
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.wait import WebDriverWait
+
+class OrderCompletedPage:
+    container_title = [By.XPATH, './/div[text() = "Заказ оформлен"]']
+    container_caption = [By.XPATH, './/div[starts-with(@class, "Order_Text")]']
+    button_status = [By.XPATH, './/button[text() = "Заказать"]']
+
+    pattern_order_id = r':\s+(\d+)\.'
+
+    def __init__(self, webdriver: WebDriver, wait: WebDriverWait):
+        self.webdriver = webdriver
+        self.wait = wait
+
+    @allure.step('Получение ID заказа')
+    def get_order_id(self) -> str | None:
+        element = self.webdriver.find_element(*self.container_caption)
+        order_id_match = match(self.pattern_order_id, element.text)
+
+        if order_id_match is not None:
+            return order_id_match.group(1)
+
+        return None
+
+    @allure.step('Проверка присутствия ID заказа на странице')
+    def check_has_order_id(self):
+        element = self.webdriver.find_element(*self.container_caption)
+        assert match(self.pattern_order_id, element.text) is not None, 'Order ID was not found'

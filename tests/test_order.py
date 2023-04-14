@@ -7,11 +7,13 @@ from selenium.webdriver.support.wait import WebDriverWait
 
 from pages.base_page import BasePage
 from pages.order_customer_page import OrderCustomerPage
+from pages.order_rent_page import OrderRentPage
+from pages.order_confirm_page import OrderConfirmPage
 from utils.random import RandomData
 
 class TestOrder:
     @allure.title('Тест заказа')
-    @allure.description('Заполняем все поля, и нажимаем кнопку **Далее**')
+    @allure.description('Отправляем заказ')
     def test_order(self, webdriver: WebDriver, wait: WebDriverWait):
         base_page = BasePage(webdriver, wait)
 
@@ -22,6 +24,8 @@ class TestOrder:
         address = RandomData.get_address()
         phone_number = RandomData.get_phone()
         metro = RandomData.get_metro_station()
+        date_string = RandomData.get_date_string()
+        comment = RandomData.get_text()
 
         order_customer_page = OrderCustomerPage(webdriver, wait)
 
@@ -41,3 +45,18 @@ class TestOrder:
 
         order_customer_page.click_button_next()
         order_customer_page.check_form_switched()
+
+        order_rent_page = OrderRentPage(webdriver, wait)
+
+        order_rent_page.set_date(date_string)
+        order_rent_page.set_random_duration()
+        order_rent_page.set_random_color()
+        order_rent_page.set_comment(comment)
+
+        order_rent_page.click_button_order()
+        order_rent_page.check_form_submitted()
+
+        order_confirm_page = OrderConfirmPage(webdriver, wait)
+
+        order_confirm_page.click_button_yes()
+        order_confirm_page.check_order_confirmed()
