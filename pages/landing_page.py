@@ -37,6 +37,7 @@ class LandingPage:
     @allure.step('Скролл к кнопке Заказать')
     def scroll_to_button_order(self):
         element = self.webdriver.find_element(*self.button_order)
+        self.wait.until(EC.element_to_be_clickable(element))
         self.webdriver.execute_script("arguments[0].scrollIntoView();", element)
 
     @allure.step('Клик в FAQ по вопросу о цене')
