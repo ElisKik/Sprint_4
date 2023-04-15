@@ -35,7 +35,7 @@ class OrderCustomerPage:
         self.webdriver.find_element(*self.input_address).send_keys(value)
 
     @allure.step('Ввод информации о заказчике: станция метро')
-    def set_metro(self, value: str):
+    def set_metro_station(self, value: str):
         self.webdriver.find_element(*self.input_metro).click()
 
         station_elements = self.webdriver.find_elements(*self.container_metro_station)

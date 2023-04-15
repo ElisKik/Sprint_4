@@ -11,9 +11,9 @@ from pages.order_confirm_page import OrderConfirmPage
 from utils.random import RandomData
 
 class TestOrder:
-    @allure.title('Тест заказа')
-    @allure.description('Отправляем заказ')
-    def test_order(self, webdriver: WebDriver, wait: WebDriverWait):
+    @allure.title('Тест подтверждения отправки нового заказа')
+    @allure.description('Заполняем необходимые поля и подтверждаем отправку заказа')
+    def test_order_confirm(self, webdriver: WebDriver, wait: WebDriverWait):
         base_page = BasePage(webdriver, wait)
 
         base_page.click_button_accept_cookies()
@@ -34,7 +34,7 @@ class TestOrder:
         order_customer_page.check_valid_address()
 
         metro = RandomData.get_metro_station()
-        order_customer_page.set_metro(metro)
+        order_customer_page.set_metro_station(metro)
 
         phone_number = RandomData.get_phone()
         order_customer_page.set_phone(phone_number)
