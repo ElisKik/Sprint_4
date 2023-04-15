@@ -8,12 +8,37 @@ from pages.base_page import BasePage
 from pages.order_customer_page import OrderCustomerPage
 from pages.order_rent_page import OrderRentPage
 from pages.order_confirm_page import OrderConfirmPage
+from pages.order_completed_page import OrderCompletedPage
 from utils.random import RandomData
 
 class TestOrder:
     @allure.title('Тест подтверждения отправки нового заказа')
-    @allure.description('Заполняем необходимые поля и подтверждаем отправку заказа')
+    @allure.description('Заполняем необходимые поля и подтверждаем отправку заказа, \
+                        проверяем, что заказ получил свой ID')
     def test_order_confirm(self, webdriver: WebDriver, wait: WebDriverWait):
+        self.__execute_order_common(webdriver, wait)
+
+        order_confirm_page = OrderConfirmPage(webdriver, wait)
+
+        order_confirm_page.click_button_yes()
+        order_confirm_page.check_order_confirmed()
+
+        order_completed_page = OrderCompletedPage(webdriver, wait)
+
+        order_completed_page.check_has_order_id()
+
+    @allure.title('Тест неподтверждения отправки нового заказа')
+    @allure.description('Заполняем необходимые поля и **не** подтверждаем отправку заказа, \
+                        проверяем, что вернулись на форму заполнения информации об аренде')
+    def test_order_not_confirm(self, webdriver: WebDriver, wait: WebDriverWait):
+        self.__execute_order_common(webdriver, wait)
+
+        order_confirm_page = OrderConfirmPage(webdriver, wait)
+
+        order_confirm_page.click_button_no()
+        order_confirm_page.check_order_not_confirmed()
+
+    def __execute_order_common(self, webdriver: WebDriver, wait: WebDriverWait):
         base_page = BasePage(webdriver, wait)
 
         base_page.click_button_accept_cookies()
@@ -56,8 +81,3 @@ class TestOrder:
 
         order_rent_page.click_button_order()
         order_rent_page.check_form_submitted()
-
-        order_confirm_page = OrderConfirmPage(webdriver, wait)
-
-        order_confirm_page.click_button_yes()
-        order_confirm_page.check_order_confirmed()
