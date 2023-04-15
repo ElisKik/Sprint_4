@@ -1,4 +1,3 @@
-import time
 import allure
 
 from selenium.webdriver import Firefox as WebDriver
@@ -20,14 +19,9 @@ class TestOrder:
         base_page.click_button_accept_cookies()
         base_page.click_button_order()
 
-        first_name, last_name = RandomData.get_name()
-        address = RandomData.get_address()
-        phone_number = RandomData.get_phone()
-        metro = RandomData.get_metro_station()
-        date_string = RandomData.get_date_string()
-        comment = RandomData.get_text()
-
         order_customer_page = OrderCustomerPage(webdriver, wait)
+
+        first_name, last_name = RandomData.get_name()
 
         order_customer_page.set_first_name(first_name)
         order_customer_page.check_valid_first_name()
@@ -35,11 +29,14 @@ class TestOrder:
         order_customer_page.set_last_name(last_name)
         order_customer_page.check_valid_last_name()
 
+        address = RandomData.get_address()
         order_customer_page.set_address(address)
         order_customer_page.check_valid_address()
 
+        metro = RandomData.get_metro_station()
         order_customer_page.set_metro(metro)
 
+        phone_number = RandomData.get_phone()
         order_customer_page.set_phone(phone_number)
         order_customer_page.check_valid_phone()
 
@@ -48,9 +45,13 @@ class TestOrder:
 
         order_rent_page = OrderRentPage(webdriver, wait)
 
+        date_string = RandomData.get_date_string()
         order_rent_page.set_date(date_string)
+
         order_rent_page.set_random_duration()
         order_rent_page.set_random_color()
+
+        comment = RandomData.get_text()
         order_rent_page.set_comment(comment)
 
         order_rent_page.click_button_order()
