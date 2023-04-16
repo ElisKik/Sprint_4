@@ -104,8 +104,7 @@ class TestOrder:
         order_customer_page.set_address(address)
         order_customer_page.check_valid_address()
 
-        metro = RandomData.get_metro_station()
-        order_customer_page.set_metro_station(metro)
+        order_customer_page.set_random_metro_station()
 
         phone_number = RandomData.get_phone()
         order_customer_page.set_phone(phone_number)

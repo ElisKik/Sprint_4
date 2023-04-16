@@ -1,6 +1,5 @@
 from datetime import datetime
-from random import choice
-from typing import Tuple, List
+from typing import Tuple
 
 from faker import Faker
 from re import match, IGNORECASE
@@ -50,10 +49,6 @@ class RandomData:
                 return address
 
     @staticmethod
-    def get_metro_station() -> str:
-        return choice(metro_stations)
-
-    @staticmethod
     def get_date_string() -> str:
         date: datetime = faker.date_between(start_date='today', end_date='+1y')
         return date.strftime('%d.%m.%Y')
@@ -61,9 +56,3 @@ class RandomData:
     @staticmethod
     def get_text() -> str:
         return faker.sentence(nb_words=10)
-
-def __load_metro_stations() -> List[str]:
-        with open('./data/metro_stations.txt', 'r') as text_io:
-            return [line.strip('\n') for line in text_io.readlines()]
-
-metro_stations = __load_metro_stations()

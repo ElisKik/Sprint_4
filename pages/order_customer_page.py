@@ -1,3 +1,4 @@
+from random import choice
 import allure
 
 from typing import List
@@ -35,17 +36,16 @@ class OrderCustomerPage:
         self.webdriver.find_element(*self.input_address).send_keys(value)
 
     @allure.step('Ввод информации о заказчике: станция метро')
-    def set_metro_station(self, value: str):
+    def set_random_metro_station(self):
         self.webdriver.find_element(*self.input_metro).click()
 
         station_elements = self.webdriver.find_elements(*self.container_metro_station)
-        my_station_element = next((station_element for station_element in station_elements if station_element.text == value), None)
 
-        self.webdriver.execute_script("arguments[0].scrollIntoView();", my_station_element)
+        random_metro_station_element = choice(station_elements)
 
-        assert my_station_element is not None, f'Element with text {value} was not found'
+        self.webdriver.execute_script("arguments[0].scrollIntoView();", random_metro_station_element)
 
-        my_station_element.click()
+        random_metro_station_element.click()
 
     @allure.step('Ввод информации о заказчике: номер телефона')
     def set_phone(self, value: str):
