@@ -27,7 +27,9 @@ class LandingPage:
 
     @allure.step('Клик на кнопку Заказать')
     def click_button_order(self):
-        self.webdriver.find_element(*self.button_order).click()
+        element = self.webdriver.find_element(*self.button_order)
+        self.wait.until(EC.element_to_be_clickable(element))
+        element.click()
 
     @allure.step('Скролл к FAQ')
     def scroll_to_faq(self):

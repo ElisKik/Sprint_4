@@ -3,6 +3,7 @@ import allure
 from selenium.webdriver import Firefox as WebDriver
 
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 
 from utils.assert_messages import EqualityMismatch, WebElementState
@@ -77,6 +78,9 @@ class BasePage:
     @allure.step('Проверка появления поля ввода для поиска существующего заказа')
     def check_input_appeared_on_button_status(self):
         locator = self.input_search_order
+
+        self.wait.until(EC.visibility_of_element_located(locator))
+
         found_input = self.webdriver.find_element(*locator)
 
         assert found_input.is_displayed(), WebElementState.not_displayed(locator)
