@@ -16,6 +16,7 @@ class BasePage:
     button_order = [By.XPATH, './/div[starts-with(@class, "Header_Nav")]/button[starts-with(@class, "Button_Button")]']
     button_status = [By.XPATH, './/div[starts-with(@class, "Header_Nav")]/button[starts-with(@class, "Header_Link")]']
     input_search_order = [By.XPATH, './/div[starts-with(@class, "Header_SearchInput")]/div/input']
+    button_search_order = [By.XPATH, './/div[starts-with(@class, "Header_SearchInput")]/button']
 
     def __init__(self, webdriver: WebDriver, wait: WebDriverWait):
         self.webdriver = webdriver
@@ -40,6 +41,15 @@ class BasePage:
     @allure.step('Клик на кнопку Статус заказа')
     def click_button_status(self):
         self.webdriver.find_element(*self.button_status).click()
+
+    @allure.step('Ввод ID заказа')
+    def set_order_id(self, value: str):
+        element = self.webdriver.find_element(*self.input_search_order)
+        element.send_keys(value)
+
+    @allure.step('Клик на кнопку поиска заказа по ID')
+    def click_button_search_order(self):
+        self.webdriver.find_element(*self.button_search_order).click()
 
     @allure.step('Проверка перенаправления на главную страницу Яндекса')
     def check_redirected_from_logo_yandex(self):

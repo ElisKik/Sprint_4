@@ -10,7 +10,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 class OrderCompletedPage:
     container_title = [By.XPATH, './/div[text() = "Заказ оформлен"]']
     container_caption = [By.XPATH, './/div[starts-with(@class, "Order_Text")]']
-    button_status = [By.XPATH, './/button[text() = "Заказать"]']
+    button_status = [By.XPATH, './/div[starts-with(@class, "Order_NextButton")]/button']
 
     pattern_order_id = r':\s+([^.]+)'
 
@@ -27,6 +27,11 @@ class OrderCompletedPage:
             return order_id_match.group(1)
 
         return None
+
+    @allure.step('Клик на кнопку Посмотреть статус')
+    def click_button_status(self):
+        element = self.webdriver.find_element(*self.button_status)
+        element.click()
 
     @allure.step('Проверка присутствия ID заказа на странице')
     def check_has_order_id(self):
