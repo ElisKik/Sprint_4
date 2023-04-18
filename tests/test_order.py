@@ -4,7 +4,7 @@ from selenium.webdriver import Firefox as WebDriver
 
 from selenium.webdriver.support.wait import WebDriverWait
 
-from pages.base_page import BasePage
+from pages.main_page import MainPage
 from pages.landing_page import LandingPage
 from pages.order_customer_page import OrderCustomerPage
 from pages.order_rent_page import OrderRentPage
@@ -74,15 +74,15 @@ class TestOrder:
         order_confirm_page.check_order_not_confirmed()
 
     def __enter_order_from_header(self, webdriver: WebDriver, wait: WebDriverWait):
-        base_page = BasePage(webdriver, wait)
+        main_page = MainPage(webdriver, wait)
 
-        base_page.click_button_accept_cookies()
-        base_page.click_button_order()
+        main_page.click_button_accept_cookies()
+        main_page.click_button_order()
 
     def __enter_order_from_landing(self, webdriver: WebDriver, wait: WebDriverWait):
-        base_page = BasePage(webdriver, wait)
+        main_page = MainPage(webdriver, wait)
 
-        base_page.click_button_accept_cookies()
+        main_page.click_button_accept_cookies()
 
         landing_page = LandingPage(webdriver, wait)
 

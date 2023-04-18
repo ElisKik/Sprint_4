@@ -10,7 +10,7 @@ from utils.assert_messages import EqualityMismatch, WebElementState
 from data.urls import Urls
 from utils.custom_conditions import CustomConditions
 
-class BasePage:
+class MainPage:
     button_accept_cookies = [By.ID, 'rcc-confirm-button']
     logo_yandex = [By.XPATH, './/a[starts-with(@class, "Header_LogoYandex")]']
     logo_scooter = [By.XPATH, './/a[starts-with(@class, "Header_LogoScooter")]']

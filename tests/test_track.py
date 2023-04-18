@@ -5,7 +5,7 @@ from selenium.webdriver import Firefox as WebDriver
 from selenium.webdriver.support.wait import WebDriverWait
 
 from data.urls import Urls
-from pages.base_page import BasePage
+from pages.main_page import MainPage
 from pages.order_customer_page import OrderCustomerPage
 from pages.order_rent_page import OrderRentPage
 from pages.order_confirm_page import OrderConfirmPage
@@ -18,10 +18,10 @@ class TestTrack:
     @allure.description('Создаём заказ, кликаем на кнопку **Посмотреть статус** сразу после создания заказа, \
                         проверяем, что на странице присутствует блок информации о заказе')
     def test_get_order_status_on_completed(self, webdriver: WebDriver, wait: WebDriverWait):
-        base_page = BasePage(webdriver, wait)
+        main_page = MainPage(webdriver, wait)
 
-        base_page.click_button_accept_cookies()
-        base_page.click_button_order()
+        main_page.click_button_accept_cookies()
+        main_page.click_button_order()
 
         self.__make_order_common(webdriver, wait)
 
@@ -35,10 +35,10 @@ class TestTrack:
     @allure.description('Создаём заказ, кликаем на кнопку **Статус заказа**, вводим номер заказа \
                         кликаем на кнопку поиска заказа, проверяем, что на странице присутствует блок информации о заказе')
     def test_get_order_status_from_header(self, webdriver: WebDriver, wait: WebDriverWait):
-        base_page = BasePage(webdriver, wait)
+        main_page = MainPage(webdriver, wait)
 
-        base_page.click_button_accept_cookies()
-        base_page.click_button_order()
+        main_page.click_button_accept_cookies()
+        main_page.click_button_order()
 
         self.__make_order_common(webdriver, wait)
 
@@ -50,11 +50,11 @@ class TestTrack:
 
         webdriver.get(Urls.BASE)
 
-        base_page.click_button_status()
-        base_page.check_input_appeared_on_button_status()
+        main_page.click_button_status()
+        main_page.check_input_appeared_on_button_status()
 
-        base_page.set_order_id(order_id)
-        base_page.click_button_search_order()
+        main_page.set_order_id(order_id)
+        main_page.click_button_search_order()
 
         track_page = TrackPage(webdriver, wait)
         track_page.check_has_order_info()
