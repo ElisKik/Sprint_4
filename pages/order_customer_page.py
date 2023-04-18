@@ -96,3 +96,4 @@ class OrderCustomerPage:
                 attachment_type=allure.attachment_type.PNG)
 
         assert is_valid, f'Input \'{given_value}\' is invalid: {error_element.text}'
+

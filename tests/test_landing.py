@@ -127,3 +127,4 @@ class TestLanding:
 
         landing_page.click_question_faq_delivery()
         landing_page.check_answer_faq_delivery()
+

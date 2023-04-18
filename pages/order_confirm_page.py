@@ -48,3 +48,4 @@ class OrderConfirmPage:
                 attachment_type=allure.attachment_type.PNG)
 
         assert is_valid, 'Previous form before order confirmation is not valid'
+

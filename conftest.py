@@ -42,3 +42,4 @@ def wait(webdriver: WebDriver) -> WebDriverWait:
     """
 
     return WebDriverWait(webdriver, TIMEOUT)
+

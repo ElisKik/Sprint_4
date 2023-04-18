@@ -15,3 +15,4 @@ class TrackPage:
     @allure.step('Проверка присутствия блока информации о заказе на странице')
     def check_has_order_info(self):
         assert len(self.webdriver.find_elements(*self.container_order_info)) > 0, 'Order info was not found'
+

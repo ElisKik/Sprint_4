@@ -176,3 +176,4 @@ class LandingPage:
         actual_text = element.text
 
         assert expected_entry in actual_text, EqualityMismatch.contains(expected_entry, actual_text)
+

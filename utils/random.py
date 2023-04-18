@@ -56,3 +56,4 @@ class RandomData:
     @staticmethod
     def get_text() -> str:
         return faker.sentence(nb_words=10)
+

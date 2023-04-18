@@ -47,3 +47,4 @@ class TestHeader:
 
         main_page.click_button_status()
         main_page.check_input_appeared_on_button_status()
+

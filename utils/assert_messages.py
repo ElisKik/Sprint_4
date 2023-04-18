@@ -13,3 +13,4 @@ class WebElementState:
     @staticmethod
     def not_displayed(locator: List[str]) -> str:
         return f'WebElement is not displayed at locator\n{locator}'
+

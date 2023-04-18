@@ -126,3 +126,4 @@ class TestOrder:
 
         order_rent_page.click_button_order()
         order_rent_page.check_form_submitted()
+

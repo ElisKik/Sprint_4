@@ -37,3 +37,4 @@ class OrderCompletedPage:
     def check_has_order_id(self):
         element = self.webdriver.find_element(*self.container_caption)
         assert search(self.pattern_order_id, element.text) is not None, 'Order ID was not found'
+

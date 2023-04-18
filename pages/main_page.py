@@ -84,3 +84,4 @@ class MainPage:
         found_input = self.webdriver.find_element(*locator)
 
         assert found_input.is_displayed(), WebElementState.not_displayed(locator)
+

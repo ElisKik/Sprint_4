@@ -67,3 +67,4 @@ class OrderRentPage:
                 attachment_type=allure.attachment_type.PNG)
 
         assert is_valid, 'Order confirmation dialog was not found'
+
