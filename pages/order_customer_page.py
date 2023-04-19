@@ -1,12 +1,14 @@
-from random import choice
 import allure
 
+from random import choice
 from typing import List
 
 from selenium.webdriver import Firefox as WebDriver
 
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
+
+from utils.random import RandomData
 
 class OrderCustomerPage:
     button_next = [By.XPATH, './/div[starts-with(@class, "Order_NextButton")]/button']
@@ -21,6 +23,29 @@ class OrderCustomerPage:
     def __init__(self, webdriver: WebDriver, wait: WebDriverWait):
         self.webdriver = webdriver
         self.wait = wait
+
+    @allure.step('Заполнение информации о заказчике')
+    def fill_form(self):
+        first_name, last_name = RandomData.get_name()
+
+        self.set_first_name(first_name)
+        self.check_valid_first_name()
+
+        self.set_last_name(last_name)
+        self.check_valid_last_name()
+
+        address = RandomData.get_address()
+        self.set_address(address)
+        self.check_valid_address()
+
+        self.set_random_metro_station()
+
+        phone_number = RandomData.get_phone()
+        self.set_phone(phone_number)
+        self.check_valid_phone()
+
+        self.click_button_next()
+        self.check_form_switched()
 
     @allure.step('Ввод информации о заказчике: имя')
     def set_first_name(self, value: str):

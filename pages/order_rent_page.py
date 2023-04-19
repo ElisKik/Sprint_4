@@ -8,6 +8,8 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.wait import WebDriverWait
 
+from utils.random import RandomData
+
 class OrderRentPage:
     button_order = [By.XPATH, './/div[starts-with(@class, "Order_Buttons")]/button[text() = "Заказать"]']
     input_date = [By.XPATH, './/input[starts-with(@class, "Input_Input") and contains(@placeholder, "Когда привезти самокат")]']
@@ -20,6 +22,20 @@ class OrderRentPage:
     def __init__(self, webdriver: WebDriver, wait: WebDriverWait):
         self.webdriver = webdriver
         self.wait = wait
+
+    @allure.step('Заполнение информации об аренде')
+    def fill_form(self):
+        date_string = RandomData.get_date_string()
+        self.set_date(date_string)
+
+        self.set_random_duration()
+        self.set_random_color()
+
+        comment = RandomData.get_text()
+        self.set_comment(comment)
+
+        self.click_button_order()
+        self.check_form_submitted()
 
     @allure.step('Ввод информации об аренде: дата')
     def set_date(self, value: str):
