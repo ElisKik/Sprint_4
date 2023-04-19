@@ -92,10 +92,7 @@ class LandingPage:
 
     @allure.step('Проверка перехода на страницу нового заказа')
     def check_page_changed_on_button_order(self):
-        expected = Urls.ORDER
-        actual = self.webdriver.current_url
-
-        assert expected == actual, EqualityMismatch.strings(expected, actual)
+        EqualityMismatch.to_current_url(self.webdriver, Urls.ORDER)
 
     @allure.step('Проверка ответа в FAQ на вопрос о цене')
     def check_answer_faq_price(self):

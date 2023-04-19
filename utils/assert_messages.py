@@ -1,9 +1,12 @@
 from typing import List
 
-class EqualityMismatch:
+from selenium.webdriver import Firefox as WebDriver
+
+class EqualityMismatch: # TODO: rename
     @staticmethod
-    def strings(expected: str, actual: str) -> str:
-        return f'Strings are not equal\nexpected: {expected}\n  actual: {actual}'
+    def to_current_url(webdriver: WebDriver, expected: str) -> str:
+        actual = webdriver.current_url
+        assert expected == actual, f'Strings are not equal\nexpected: {expected}\n  actual: {actual}'
 
     @staticmethod
     def contains(entry: str, text: str) -> str:

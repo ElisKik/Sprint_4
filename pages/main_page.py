@@ -50,25 +50,15 @@ class MainPage:
     @allure.step('Проверка перенаправления на главную страницу Яндекса')
     def check_redirected_from_logo_yandex(self):
         self.wait.until(lambda webdriver: CustomConditions.url_to_be_in_any_window(webdriver, Urls.YANDEX_BASE))
-
-        expected = Urls.YANDEX_BASE
-        actual = self.webdriver.current_url
-
-        assert expected == actual, EqualityMismatch.strings(expected, actual)
+        EqualityMismatch.to_current_url(self.webdriver, Urls.YANDEX_BASE)
 
     @allure.step('Проверка перенаправления на главную страницу Яндекс.Самокат')
     def check_redirected_from_logo_scooter(self):
-        expected = Urls.BASE
-        actual = self.webdriver.current_url
-
-        assert expected == actual, EqualityMismatch.strings(expected, actual)
+        EqualityMismatch.to_current_url(self.webdriver, Urls.BASE)
 
     @allure.step('Проверка перехода на страницу нового заказа')
     def check_page_changed_on_button_order(self):
-        expected = Urls.ORDER
-        actual = self.webdriver.current_url
-
-        assert expected == actual, EqualityMismatch.strings(expected, actual)
+        EqualityMismatch.to_current_url(self.webdriver, Urls.ORDER)
 
     @allure.step('Проверка появления поля ввода для поиска существующего заказа')
     def check_input_appeared_on_button_status(self):
