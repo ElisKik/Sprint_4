@@ -9,6 +9,7 @@ from typing import Iterable
 from selenium.webdriver import Firefox as WebDriver
 from selenium.webdriver.firefox.options import Options
 
+from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 
 from data.constants import TIMEOUT
@@ -30,6 +31,9 @@ def webdriver() -> Iterable[WebDriver]:
     webdriver.maximize_window()
 
     webdriver.get(Urls.BASE)
+
+    button_accept_cookies = [By.ID, 'rcc-confirm-button']
+    webdriver.find_element(*button_accept_cookies).click()
 
     yield webdriver
 

@@ -75,15 +75,9 @@ class TestOrder:
 
     def __enter_order_from_header(self, webdriver: WebDriver, wait: WebDriverWait):
         main_page = MainPage(webdriver, wait)
-
-        main_page.click_button_accept_cookies()
         main_page.click_button_order()
 
     def __enter_order_from_landing(self, webdriver: WebDriver, wait: WebDriverWait):
-        main_page = MainPage(webdriver, wait)
-
-        main_page.click_button_accept_cookies()
-
         landing_page = LandingPage(webdriver, wait)
 
         landing_page.scroll_to_button_order()

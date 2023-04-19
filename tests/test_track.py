@@ -20,7 +20,6 @@ class TestTrack:
     def test_get_order_status_on_completed(self, webdriver: WebDriver, wait: WebDriverWait):
         main_page = MainPage(webdriver, wait)
 
-        main_page.click_button_accept_cookies()
         main_page.click_button_order()
 
         self.__make_order_common(webdriver, wait)
@@ -36,8 +35,6 @@ class TestTrack:
                         кликаем на кнопку поиска заказа, проверяем, что на странице присутствует блок информации о заказе')
     def test_get_order_status_from_header(self, webdriver: WebDriver, wait: WebDriverWait):
         main_page = MainPage(webdriver, wait)
-
-        main_page.click_button_accept_cookies()
         main_page.click_button_order()
 
         self.__make_order_common(webdriver, wait)

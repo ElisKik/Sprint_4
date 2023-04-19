@@ -5,7 +5,6 @@ from selenium.webdriver import Firefox as WebDriver
 from selenium.webdriver.support.wait import WebDriverWait
 
 from data.urls import Urls
-from pages.main_page import MainPage
 from pages.landing_page import LandingPage
 
 class TestLanding:
@@ -14,9 +13,6 @@ class TestLanding:
                         что произошёл переход на страницу начала заказа')
     @allure.link(Urls.ORDER, name='Ожидаемый URL, на который должно произойти перенаправление')
     def test_click_button_order(self, webdriver: WebDriver, wait: WebDriverWait):
-        main_page = MainPage(webdriver, wait)
-        main_page.click_button_accept_cookies()
-
         landing_page = LandingPage(webdriver, wait)
 
         landing_page.scroll_to_button_order()
@@ -27,9 +23,6 @@ class TestLanding:
     @allure.title('Тест FAQ: вопрос о цене')
     @allure.description('Кликаем на вопрос и проверяем, что соседний элемент содержит ожидаемый ответ')
     def test_faq_price(self, webdriver: WebDriver, wait: WebDriverWait):
-        main_page = MainPage(webdriver, wait)
-        main_page.click_button_accept_cookies()
-
         landing_page = LandingPage(webdriver, wait)
 
         landing_page.scroll_to_faq()
@@ -40,9 +33,6 @@ class TestLanding:
     @allure.title('Тест FAQ: вопрос о нескольких самокатах')
     @allure.description('Кликаем на вопрос и проверяем, что соседний элемент содержит ожидаемый ответ')
     def test_faq_multiple_scooters(self, webdriver: WebDriver, wait: WebDriverWait):
-        main_page = MainPage(webdriver, wait)
-        main_page.click_button_accept_cookies()
-
         landing_page = LandingPage(webdriver, wait)
 
         landing_page.scroll_to_faq()
@@ -53,9 +43,6 @@ class TestLanding:
     @allure.title('Тест FAQ: вопрос о времени аренды')
     @allure.description('Кликаем на вопрос и проверяем, что соседний элемент содержит ожидаемый ответ')
     def test_faq_rent_rime(self, webdriver: WebDriver, wait: WebDriverWait):
-        main_page = MainPage(webdriver, wait)
-        main_page.click_button_accept_cookies()
-
         landing_page = LandingPage(webdriver, wait)
 
         landing_page.scroll_to_faq()
@@ -66,9 +53,6 @@ class TestLanding:
     @allure.title('Тест FAQ: вопрос об аренде сегодня')
     @allure.description('Кликаем на вопрос и проверяем, что соседний элемент содержит ожидаемый ответ')
     def test_faq_today(self, webdriver: WebDriver, wait: WebDriverWait):
-        main_page = MainPage(webdriver, wait)
-        main_page.click_button_accept_cookies()
-
         landing_page = LandingPage(webdriver, wait)
 
         landing_page.scroll_to_faq()
@@ -79,9 +63,6 @@ class TestLanding:
     @allure.title('Тест FAQ: вопрос об изменениях срока аренды')
     @allure.description('Кликаем на вопрос и проверяем, что соседний элемент содержит ожидаемый ответ')
     def test_faq_change_terms(self, webdriver: WebDriver, wait: WebDriverWait):
-        main_page = MainPage(webdriver, wait)
-        main_page.click_button_accept_cookies()
-
         landing_page = LandingPage(webdriver, wait)
 
         landing_page.scroll_to_faq()
@@ -92,9 +73,6 @@ class TestLanding:
     @allure.title('Тест FAQ: вопрос о зарядке')
     @allure.description('Кликаем на вопрос и проверяем, что соседний элемент содержит ожидаемый ответ')
     def test_faq_change_charging(self, webdriver: WebDriver, wait: WebDriverWait):
-        main_page = MainPage(webdriver, wait)
-        main_page.click_button_accept_cookies()
-
         landing_page = LandingPage(webdriver, wait)
 
         landing_page.scroll_to_faq()
@@ -105,9 +83,6 @@ class TestLanding:
     @allure.title('Тест FAQ: вопрос об отмене заказа')
     @allure.description('Кликаем на вопрос и проверяем, что соседний элемент содержит ожидаемый ответ')
     def test_faq_change_cancel(self, webdriver: WebDriver, wait: WebDriverWait):
-        main_page = MainPage(webdriver, wait)
-        main_page.click_button_accept_cookies()
-
         landing_page = LandingPage(webdriver, wait)
 
         landing_page.scroll_to_faq()
@@ -118,9 +93,6 @@ class TestLanding:
     @allure.title('Тест FAQ: вопрос об доставке в область')
     @allure.description('Кликаем на вопрос и проверяем, что соседний элемент содержит ожидаемый ответ')
     def test_faq_change_delivery(self, webdriver: WebDriver, wait: WebDriverWait):
-        main_page = MainPage(webdriver, wait)
-        main_page.click_button_accept_cookies()
-
         landing_page = LandingPage(webdriver, wait)
 
         landing_page.scroll_to_faq()
