@@ -6,8 +6,8 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 
-from utils.assert_messages import EqualityMismatch, WebElementState
 from data.urls import Urls
+from utils.assert_helper import AssertHelper
 from utils.custom_conditions import CustomConditions
 
 class MainPage:
@@ -50,23 +50,19 @@ class MainPage:
     @allure.step('Проверка перенаправления на главную страницу Яндекса')
     def check_redirected_from_logo_yandex(self):
         self.wait.until(lambda webdriver: CustomConditions.url_to_be_in_any_window(webdriver, Urls.YANDEX_BASE))
-        EqualityMismatch.to_current_url(self.webdriver, Urls.YANDEX_BASE)
+        AssertHelper.current_url_is(self.webdriver, Urls.YANDEX_BASE)
 
     @allure.step('Проверка перенаправления на главную страницу Яндекс.Самокат')
     def check_redirected_from_logo_scooter(self):
-        EqualityMismatch.to_current_url(self.webdriver, Urls.BASE)
+        AssertHelper.current_url_is(self.webdriver, Urls.BASE)
 
     @allure.step('Проверка перехода на страницу нового заказа')
     def check_page_changed_on_button_order(self):
-        EqualityMismatch.to_current_url(self.webdriver, Urls.ORDER)
+        AssertHelper.current_url_is(self.webdriver, Urls.ORDER)
 
     @allure.step('Проверка появления поля ввода для поиска существующего заказа')
     def check_input_appeared_on_button_status(self):
         locator = self.input_search_order
-
         self.wait.until(EC.visibility_of_element_located(locator))
-
-        found_input = self.webdriver.find_element(*locator)
-
-        assert found_input.is_displayed(), WebElementState.not_displayed(locator)
+        AssertHelper.is_displayed(self.webdriver, locator)
 

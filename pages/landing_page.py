@@ -6,7 +6,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 
-from utils.assert_messages import EqualityMismatch
+from utils.assert_helper import AssertHelper
 from data.urls import Urls
 
 class LandingPage:
@@ -52,9 +52,9 @@ class LandingPage:
         question_element = self.webdriver.find_element(*question_locator)
         answer_element = question_element.find_element(*self.container_answer)
 
-        assert answer_text in answer_element.text, EqualityMismatch.contains(answer_text, answer_element.text)
+        AssertHelper.string_contains(answer_text, answer_element.text)
 
     @allure.step('Проверка перехода на страницу нового заказа')
     def check_page_changed_on_button_order(self):
-        EqualityMismatch.to_current_url(self.webdriver, Urls.ORDER)
+        AssertHelper.current_url_is(self.webdriver, Urls.ORDER)
 
