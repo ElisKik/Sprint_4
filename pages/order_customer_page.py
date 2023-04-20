@@ -6,8 +6,8 @@ from typing import List
 from selenium.webdriver import Firefox as WebDriver
 
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.wait import WebDriverWait
 
+from pages.base_page import BasePage
 from utils.random import RandomData
 
 class OrderCustomerPage:
@@ -20,9 +20,9 @@ class OrderCustomerPage:
     container_metro_station = [By.XPATH, './/div[starts-with(@class, "Order_Text__")]']
     container_next_form = [By.XPATH, './/div[text()="Про аренду"]']
 
-    def __init__(self, webdriver: WebDriver, wait: WebDriverWait):
+    def __init__(self, webdriver: WebDriver, base_page: BasePage):
         self.webdriver = webdriver
-        self.wait = wait
+        self.base_page = base_page
 
     @allure.step('Заполнение информации о заказчике')
     def fill_form(self):
@@ -97,7 +97,7 @@ class OrderCustomerPage:
 
     @allure.step('Проверка успешного перехода к следующей форме оформления заказа')
     def check_form_switched(self):
-        self.wait.until(lambda driver: len(driver.find_elements(*self.button_next)) == 0)
+        self.base_page.wait.until(lambda driver: len(driver.find_elements(*self.button_next)) == 0)
         assert len(self.webdriver.find_elements(*self.container_next_form)) > 0, f'Form was not switched to the next'
 
     def __check_valid_input(self, locator: List[str]):

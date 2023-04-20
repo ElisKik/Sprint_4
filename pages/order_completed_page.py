@@ -5,7 +5,6 @@ import allure
 from selenium.webdriver import Firefox as WebDriver
 
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.wait import WebDriverWait
 
 class OrderCompletedPage:
     container_title = [By.XPATH, './/div[text() = "Заказ оформлен"]']
@@ -14,9 +13,8 @@ class OrderCompletedPage:
 
     pattern_order_id = r':\s+([^.]+)'
 
-    def __init__(self, webdriver: WebDriver, wait: WebDriverWait):
+    def __init__(self, webdriver: WebDriver):
         self.webdriver = webdriver
-        self.wait = wait
 
     @allure.step('Получение ID заказа')
     def get_order_id(self) -> str | None:

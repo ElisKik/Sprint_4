@@ -2,9 +2,8 @@ import allure
 
 from selenium.webdriver import Firefox as WebDriver
 
-from selenium.webdriver.support.wait import WebDriverWait
-
 from data.urls import Urls
+from pages.base_page import BasePage
 from pages.main_page import MainPage
 from pages.order_customer_page import OrderCustomerPage
 from pages.order_rent_page import OrderRentPage
@@ -17,29 +16,32 @@ class TestTrack:
     @allure.title('Тест получения статуса заказа со страницы успешного завершения оформления заказа')
     @allure.description('Создаём заказ, кликаем на кнопку **Посмотреть статус** сразу после создания заказа, \
                         проверяем, что на странице присутствует блок информации о заказе')
-    def test_get_order_status_on_completed(self, webdriver: WebDriver, wait: WebDriverWait):
-        main_page = MainPage(webdriver, wait)
+    def test_get_order_status_on_completed(self, webdriver: WebDriver):
+        base_page = BasePage(webdriver)
 
+        main_page = MainPage(webdriver, base_page)
         main_page.click_button_order()
 
-        self.__make_order_common(webdriver, wait)
+        self.__make_order_common(webdriver)
 
-        order_completed_page = OrderCompletedPage(webdriver, wait)
+        order_completed_page = OrderCompletedPage(webdriver)
         order_completed_page.click_button_status()
 
-        track_page = TrackPage(webdriver, wait)
+        track_page = TrackPage(webdriver)
         track_page.check_has_order_info()
 
     @allure.title('Тест получения статуса заказа с поля поиска в хэдере')
     @allure.description('Создаём заказ, кликаем на кнопку **Статус заказа**, вводим номер заказа \
                         кликаем на кнопку поиска заказа, проверяем, что на странице присутствует блок информации о заказе')
-    def test_get_order_status_from_header(self, webdriver: WebDriver, wait: WebDriverWait):
-        main_page = MainPage(webdriver, wait)
+    def test_get_order_status_from_header(self, webdriver: WebDriver):
+        base_page = BasePage(webdriver)
+
+        main_page = MainPage(webdriver, base_page)
         main_page.click_button_order()
 
-        self.__make_order_common(webdriver, wait)
+        self.__make_order_common(webdriver)
 
-        order_completed_page = OrderCompletedPage(webdriver, wait)
+        order_completed_page = OrderCompletedPage(webdriver)
 
         order_id = order_completed_page.get_order_id()
 
@@ -53,11 +55,12 @@ class TestTrack:
         main_page.set_order_id(order_id)
         main_page.click_button_search_order()
 
-        track_page = TrackPage(webdriver, wait)
+        track_page = TrackPage(webdriver)
         track_page.check_has_order_info()
 
-    def __make_order_common(self, webdriver: WebDriver, wait: WebDriverWait):
-        order_customer_page = OrderCustomerPage(webdriver, wait)
+    def __make_order_common(self, webdriver: WebDriver):
+        base_page = BasePage(webdriver)
+        order_customer_page = OrderCustomerPage(webdriver, base_page)
 
         first_name, last_name = RandomData.get_name()
 
@@ -80,7 +83,7 @@ class TestTrack:
         order_customer_page.click_button_next()
         order_customer_page.check_form_switched()
 
-        order_rent_page = OrderRentPage(webdriver, wait)
+        order_rent_page = OrderRentPage(webdriver)
 
         date_string = RandomData.get_date_string()
         order_rent_page.set_date(date_string)
@@ -94,7 +97,7 @@ class TestTrack:
         order_rent_page.click_button_order()
         order_rent_page.check_form_submitted()
 
-        order_confirm_page = OrderConfirmPage(webdriver, wait)
+        order_confirm_page = OrderConfirmPage(webdriver)
 
         order_confirm_page.click_button_yes()
         order_confirm_page.check_order_confirmed()

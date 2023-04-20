@@ -6,7 +6,6 @@ from selenium.webdriver import Firefox as WebDriver
 
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.support.wait import WebDriverWait
 
 from utils.random import RandomData
 
@@ -19,9 +18,8 @@ class OrderRentPage:
     input_comment = [By.XPATH, './/input[starts-with(@class, "Input_Input") and contains(@placeholder, "Комментарий для курьера")]']
     container_confirmation = [By.XPATH, './/div[contains(text(), "Хотите оформить")]']
 
-    def __init__(self, webdriver: WebDriver, wait: WebDriverWait):
+    def __init__(self, webdriver: WebDriver):
         self.webdriver = webdriver
-        self.wait = wait
 
     @allure.step('Заполнение информации об аренде')
     def fill_form(self):

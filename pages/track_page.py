@@ -3,14 +3,12 @@ import allure
 from selenium.webdriver import Firefox as WebDriver
 
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.wait import WebDriverWait
 
 class TrackPage:
     container_order_info = [By.XPATH, './/div[starts-with(@class, "Track_OrderInfo")]']
 
-    def __init__(self, webdriver: WebDriver, wait: WebDriverWait):
+    def __init__(self, webdriver: WebDriver):
         self.webdriver = webdriver
-        self.wait = wait
 
     @allure.step('Проверка присутствия блока информации о заказе на странице')
     def check_has_order_info(self):
