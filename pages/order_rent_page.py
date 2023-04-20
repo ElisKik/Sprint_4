@@ -73,12 +73,5 @@ class OrderRentPage:
     @allure.step('Проверка успешного перехода к подтверждению заказа')
     def check_form_submitted(self):
         is_valid = len(self.webdriver.find_elements(*self.container_confirmation)) > 0
-
-        if not is_valid:
-            allure.attach(
-                body=self.webdriver.get_screenshot_as_png(),
-                name='order-make-proceed-unexpected',
-                attachment_type=allure.attachment_type.PNG)
-
         assert is_valid, 'Order confirmation dialog was not found'
 

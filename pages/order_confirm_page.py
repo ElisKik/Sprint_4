@@ -26,24 +26,10 @@ class OrderConfirmPage:
     @allure.step('Проверка подтверждения заказа пользователем')
     def check_order_confirmed(self):
         is_valid = len(self.webdriver.find_elements(*self.container_order_made)) > 0
-
-        if not is_valid:
-            allure.attach(
-                body=self.webdriver.get_screenshot_as_png(),
-                name='order-confirmation-yes-unexpected',
-                attachment_type=allure.attachment_type.PNG)
-
         assert is_valid, 'Dialog after order confirmation is not valid'
 
     @allure.step('Проверка неподтверждения заказа пользователем')
     def check_order_not_confirmed(self):
         is_valid = len(self.webdriver.find_elements(*self.button_order)) > 0
-
-        if not is_valid:
-            allure.attach(
-                body=self.webdriver.get_screenshot_as_png(),
-                name='order-confirmation-no-unexpected',
-                attachment_type=allure.attachment_type.PNG)
-
         assert is_valid, 'Previous form before order confirmation is not valid'
 

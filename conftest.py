@@ -2,6 +2,7 @@
 Script for definitions of fixtures.
 """
 
+import allure
 import pytest
 
 from typing import Iterable
@@ -33,4 +34,18 @@ def webdriver() -> Iterable[WebDriver]:
     yield webdriver
 
     webdriver.quit()
+
+@pytest.hookimpl(tryfirst=True, hookwrapper=True)
+def pytest_runtest_makereport(item):
+    outcome = yield
+
+    result: pytest.CollectReport = outcome.get_result()
+
+    if result.when == 'call' and result.failed:
+        if 'webdriver' in item.fixturenames:
+            webdriver: WebDriver = item.funcargs['webdriver']
+            allure.attach(
+                body=webdriver.get_screenshot_as_png(),
+                name=f'{item.originalname}.png',
+                attachment_type=allure.attachment_type.PNG)
 

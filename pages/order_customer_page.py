@@ -114,11 +114,5 @@ class OrderCustomerPage:
 
         is_valid = len(error_element.text) == 0
 
-        if not is_valid:
-            allure.attach(
-                body=self.webdriver.get_screenshot_as_png(),
-                name='form-customer-input-validation-error',
-                attachment_type=allure.attachment_type.PNG)
-
         assert is_valid, f'Input \'{given_value}\' is invalid: {error_element.text}'
 
