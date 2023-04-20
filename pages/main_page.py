@@ -7,8 +7,8 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 
 from data.urls import Urls
+from pages.base_page import BasePage
 from utils.assert_helper import AssertHelper
-from utils.custom_conditions import CustomConditions
 
 class MainPage:
     logo_yandex = [By.XPATH, './/a[starts-with(@class, "Header_LogoYandex")]']
@@ -49,7 +49,8 @@ class MainPage:
 
     @allure.step('Проверка перенаправления на главную страницу Яндекса')
     def check_redirected_from_logo_yandex(self):
-        self.wait.until(lambda webdriver: CustomConditions.url_to_be_in_any_window(webdriver, Urls.YANDEX_BASE))
+        base_page = BasePage(self.webdriver, self.wait)
+        base_page.wait_url_to_be_in_any_window(Urls.YANDEX_BASE)
         AssertHelper.current_url_is(self.webdriver, Urls.YANDEX_BASE)
 
     @allure.step('Проверка перенаправления на главную страницу Яндекс.Самокат')
