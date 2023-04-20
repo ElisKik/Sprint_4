@@ -2,14 +2,13 @@ import allure
 
 from random import choice
 
-from selenium.webdriver import Firefox as WebDriver
-
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 
+from pages.base_page import BasePage
 from utils.random import RandomData
 
-class OrderRentPage:
+class OrderRentPage(BasePage):
     button_order = [By.XPATH, './/div[starts-with(@class, "Order_Buttons")]/button[text() = "Заказать"]']
     input_date = [By.XPATH, './/input[starts-with(@class, "Input_Input") and contains(@placeholder, "Когда привезти самокат")]']
     container_duration = [By.XPATH, './/div[contains(text(), "Срок аренды")]']
@@ -17,9 +16,6 @@ class OrderRentPage:
     label_color = [By.XPATH, './/label[starts-with(@class, "Checkbox_Label")]']
     input_comment = [By.XPATH, './/input[starts-with(@class, "Input_Input") and contains(@placeholder, "Комментарий для курьера")]']
     container_confirmation = [By.XPATH, './/div[contains(text(), "Хотите оформить")]']
-
-    def __init__(self, webdriver: WebDriver):
-        self.webdriver = webdriver
 
     @allure.step('Заполнение информации об аренде')
     def fill_form(self):

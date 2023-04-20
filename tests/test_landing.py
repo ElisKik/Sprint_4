@@ -4,7 +4,6 @@ import pytest
 from selenium.webdriver import Firefox as WebDriver
 
 from data.urls import Urls
-from pages.base_page import BasePage
 from pages.landing_page import LandingPage
 
 class TestLanding:
@@ -13,9 +12,7 @@ class TestLanding:
                         что произошёл переход на страницу начала заказа')
     @allure.link(Urls.ORDER, name='Ожидаемый URL, на который должно произойти перенаправление')
     def test_click_button_order(self, webdriver: WebDriver):
-        base_page = BasePage(webdriver)
-
-        landing_page = LandingPage(webdriver, base_page)
+        landing_page = LandingPage(webdriver)
 
         landing_page.scroll_to_button_order()
 
@@ -38,9 +35,7 @@ class TestLanding:
         ]
     )
     def test_faq(self, webdriver: WebDriver, question: str, answer: str):
-        base_page = BasePage(webdriver)
-
-        landing_page = LandingPage(webdriver, base_page)
+        landing_page = LandingPage(webdriver)
 
         landing_page.scroll_to_faq()
 

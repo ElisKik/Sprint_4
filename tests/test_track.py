@@ -3,7 +3,6 @@ import allure
 from selenium.webdriver import Firefox as WebDriver
 
 from data.urls import Urls
-from pages.base_page import BasePage
 from pages.main_page import MainPage
 from pages.order_customer_page import OrderCustomerPage
 from pages.order_rent_page import OrderRentPage
@@ -17,9 +16,7 @@ class TestTrack:
     @allure.description('Создаём заказ, кликаем на кнопку **Посмотреть статус** сразу после создания заказа, \
                         проверяем, что на странице присутствует блок информации о заказе')
     def test_get_order_status_on_completed(self, webdriver: WebDriver):
-        base_page = BasePage(webdriver)
-
-        main_page = MainPage(webdriver, base_page)
+        main_page = MainPage(webdriver)
         main_page.click_button_order()
 
         self.__make_order_common(webdriver)
@@ -34,9 +31,7 @@ class TestTrack:
     @allure.description('Создаём заказ, кликаем на кнопку **Статус заказа**, вводим номер заказа \
                         кликаем на кнопку поиска заказа, проверяем, что на странице присутствует блок информации о заказе')
     def test_get_order_status_from_header(self, webdriver: WebDriver):
-        base_page = BasePage(webdriver)
-
-        main_page = MainPage(webdriver, base_page)
+        main_page = MainPage(webdriver)
         main_page.click_button_order()
 
         self.__make_order_common(webdriver)
@@ -59,8 +54,7 @@ class TestTrack:
         track_page.check_has_order_info()
 
     def __make_order_common(self, webdriver: WebDriver):
-        base_page = BasePage(webdriver)
-        order_customer_page = OrderCustomerPage(webdriver, base_page)
+        order_customer_page = OrderCustomerPage(webdriver)
 
         first_name, last_name = RandomData.get_name()
 

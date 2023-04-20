@@ -1,17 +1,14 @@
 import allure
 
-from selenium.webdriver import Firefox as WebDriver
-
 from selenium.webdriver.common.by import By
 
-class OrderConfirmPage:
+from pages.base_page import BasePage
+
+class OrderConfirmPage(BasePage):
     button_yes = [By.XPATH, './/button[text() = "Да"]']
     button_no = [By.XPATH, './/button[text() = "Да"]']
     button_order = [By.XPATH, './/button[text() = "Заказать"]']
     container_order_made = [By.XPATH, './/div[text() = "Заказ оформлен"]']
-
-    def __init__(self, webdriver: WebDriver):
-        self.webdriver = webdriver
 
     @allure.step('Клик на кнопку Да')
     def click_button_yes(self):

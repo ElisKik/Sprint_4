@@ -1,7 +1,5 @@
 import allure
 
-from selenium.webdriver import Firefox as WebDriver
-
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 
@@ -9,17 +7,13 @@ from data.urls import Urls
 from pages.base_page import BasePage
 from utils.assert_helper import AssertHelper
 
-class MainPage:
+class MainPage(BasePage):
     logo_yandex = [By.XPATH, './/a[starts-with(@class, "Header_LogoYandex")]']
     logo_scooter = [By.XPATH, './/a[starts-with(@class, "Header_LogoScooter")]']
     button_order = [By.XPATH, './/div[starts-with(@class, "Header_Nav")]/button[starts-with(@class, "Button_Button")]']
     button_status = [By.XPATH, './/div[starts-with(@class, "Header_Nav")]/button[starts-with(@class, "Header_Link")]']
     input_search_order = [By.XPATH, './/div[starts-with(@class, "Header_SearchInput")]/div/input']
     button_search_order = [By.XPATH, './/div[starts-with(@class, "Header_SearchInput")]/button']
-
-    def __init__(self, webdriver: WebDriver, base_page: BasePage):
-        self.webdriver = webdriver
-        self.base_page = base_page
 
     @allure.step('Клик на лого Яндекса')
     def click_logo_yandex(self):
@@ -48,7 +42,7 @@ class MainPage:
 
     @allure.step('Проверка перенаправления на главную страницу Яндекса')
     def check_redirected_from_logo_yandex(self):
-        self.base_page.wait_url_to_be_in_any_window(Urls.YANDEX_BASE)
+        self.wait_url_to_be_in_any_window(Urls.YANDEX_BASE)
         AssertHelper.current_url_is(self.webdriver, Urls.YANDEX_BASE)
 
     @allure.step('Проверка перенаправления на главную страницу Яндекс.Самокат')
@@ -62,6 +56,6 @@ class MainPage:
     @allure.step('Проверка появления поля ввода для поиска существующего заказа')
     def check_input_appeared_on_button_status(self):
         locator = self.input_search_order
-        self.base_page.wait.until(EC.visibility_of_element_located(locator))
+        self.wait.until(EC.visibility_of_element_located(locator))
         AssertHelper.is_displayed(self.webdriver, locator)
 

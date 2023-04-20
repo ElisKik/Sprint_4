@@ -3,7 +3,6 @@ import allure
 from selenium.webdriver import Firefox as WebDriver
 
 from data.urls import Urls
-from pages.base_page import BasePage
 from pages.main_page import MainPage
 
 class TestHeader:
@@ -12,9 +11,8 @@ class TestHeader:
                         что произошло перенаправление в любой из вкладок браузера')
     @allure.link(Urls.YANDEX_BASE, name='Ожидаемый URL, на который должно произойти перенаправление')
     def test_click_logo_yandex(self, webdriver: WebDriver):
-        base_page = BasePage(webdriver)
+        main_page = MainPage(webdriver)
 
-        main_page = MainPage(webdriver, base_page)
         main_page.click_logo_yandex()
         main_page.check_redirected_from_logo_yandex()
 
@@ -24,9 +22,8 @@ class TestHeader:
                         тестируемого сайта, в текущей вкладке браузера')
     @allure.link(Urls.BASE, name='Ожидаемый URL, на который должен произойти переход')
     def test_click_logo_scooter(self, webdriver: WebDriver):
-        base_page = BasePage(webdriver)
+        main_page = MainPage(webdriver)
 
-        main_page = MainPage(webdriver, base_page)
         main_page.click_logo_scooter()
         main_page.check_redirected_from_logo_scooter()
 
@@ -35,9 +32,8 @@ class TestHeader:
                         что произошёл переход на страницу начала заказа')
     @allure.link(Urls.ORDER, name='Ожидаемый URL, на который должно произойти перенаправление')
     def test_click_button_order(self, webdriver: WebDriver):
-        base_page = BasePage(webdriver)
+        main_page = MainPage(webdriver)
 
-        main_page = MainPage(webdriver, base_page)
         main_page.click_button_order()
         main_page.check_page_changed_on_button_order()
 
@@ -45,9 +41,8 @@ class TestHeader:
     @allure.description('Кликаем на кнопку **Статус заказа**, и проверяем \
                         что появилось поле для поиска заказа по ID')
     def test_click_button_status(self, webdriver: WebDriver):
-        base_page = BasePage(webdriver)
+        main_page = MainPage(webdriver)
 
-        main_page = MainPage(webdriver, base_page)
         main_page.click_button_status()
         main_page.check_input_appeared_on_button_status()
 

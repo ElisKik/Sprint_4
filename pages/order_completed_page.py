@@ -1,20 +1,17 @@
-from re import search
-
 import allure
 
-from selenium.webdriver import Firefox as WebDriver
+from re import search
 
 from selenium.webdriver.common.by import By
 
-class OrderCompletedPage:
+from pages.base_page import BasePage
+
+class OrderCompletedPage(BasePage):
     container_title = [By.XPATH, './/div[text() = "Заказ оформлен"]']
     container_caption = [By.XPATH, './/div[starts-with(@class, "Order_Text")]']
     button_status = [By.XPATH, './/div[starts-with(@class, "Order_NextButton")]/button']
 
     pattern_order_id = r':\s+([^.]+)'
-
-    def __init__(self, webdriver: WebDriver):
-        self.webdriver = webdriver
 
     @allure.step('Получение ID заказа')
     def get_order_id(self) -> str | None:
