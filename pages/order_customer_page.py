@@ -1,7 +1,6 @@
 import allure
 
 from random import choice
-from typing import List
 
 from selenium.webdriver.common.by import By
 
@@ -75,38 +74,22 @@ class OrderCustomerPage(BasePage):
 
     @allure.step('Проверка валидности ввода: имя')
     def check_valid_first_name(self):
-        self.__check_valid_input(self.input_first_name)
+        self.check_valid_input(self.input_first_name)
 
     @allure.step('Проверка валидности ввода: фамилия')
     def check_valid_last_name(self):
-        self.__check_valid_input(self.input_last_name)
+        self.check_valid_input(self.input_last_name)
 
     @allure.step('Проверка валидности ввода: адрес')
     def check_valid_address(self):
-        self.__check_valid_input(self.input_address)
+        self.check_valid_input(self.input_address)
 
     @allure.step('Проверка валидности ввода: номер телефона')
     def check_valid_phone(self):
-        self.__check_valid_input(self.input_phone)
+        self.check_valid_input(self.input_phone)
 
     @allure.step('Проверка успешного перехода к следующей форме оформления заказа')
     def check_form_switched(self):
         self.wait.until(lambda driver: len(driver.find_elements(*self.button_next)) == 0)
         assert len(self.webdriver.find_elements(*self.container_next_form)) > 0, f'Form was not switched to the next'
-
-    def __check_valid_input(self, locator: List[str]):
-        input_element = self.webdriver.find_element(*locator)
-
-        given_value = input_element.get_attribute('value')
-
-        input_element.clear()
-        input_element.send_keys(given_value)
-
-        error_locator = [By.XPATH, f'{locator[1]}/../div']
-
-        error_element = self.webdriver.find_element(*error_locator)
-
-        is_valid = len(error_element.text) == 0
-
-        assert is_valid, f'Input \'{given_value}\' is invalid: {error_element.text}'
 
