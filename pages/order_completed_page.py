@@ -25,8 +25,7 @@ class OrderCompletedPage(BasePage):
 
     @allure.step('Клик на кнопку Посмотреть статус')
     def click_button_status(self):
-        element = self.webdriver.find_element(*self.button_status)
-        element.click()
+        self.click(self.button_status)
 
     @allure.step('Проверка присутствия ID заказа на странице')
     def check_has_order_id(self):

@@ -17,28 +17,27 @@ class MainPage(BasePage):
 
     @allure.step('Клик на лого Яндекса')
     def click_logo_yandex(self):
-        self.webdriver.find_element(*self.logo_yandex).click()
+        self.click(self.logo_yandex)
 
     @allure.step('Клик на лого Яндекс.Самокат')
     def click_logo_scooter(self):
-        self.webdriver.find_element(*self.logo_scooter).click()
+        self.click(self.logo_scooter)
 
     @allure.step('Клик на кнопку Заказать')
     def click_button_order(self):
-        self.webdriver.find_element(*self.button_order).click()
+        self.click(self.button_order)
 
     @allure.step('Клик на кнопку Статус заказа')
     def click_button_status(self):
-        self.webdriver.find_element(*self.button_status).click()
+        self.click(self.button_status)
 
     @allure.step('Ввод ID заказа')
     def set_order_id(self, value: str):
-        element = self.webdriver.find_element(*self.input_search_order)
-        element.send_keys(value)
+        self.send_keys(self.input_search_order, value)
 
     @allure.step('Клик на кнопку поиска заказа по ID')
     def click_button_search_order(self):
-        self.webdriver.find_element(*self.button_search_order).click()
+        self.click(self.button_search_order)
 
     @allure.step('Проверка перенаправления на главную страницу Яндекса')
     def check_redirected_from_logo_yandex(self):

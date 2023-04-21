@@ -12,13 +12,11 @@ class OrderConfirmPage(BasePage):
 
     @allure.step('Клик на кнопку Да')
     def click_button_yes(self):
-        element = self.webdriver.find_element(*self.button_yes)
-        element.click()
+        self.click(self.button_yes)
 
     @allure.step('Клик на кнопку Нет')
     def click_button_no(self):
-        element = self.webdriver.find_element(*self.button_yes)
-        element.click()
+        self.click(self.button_yes)
 
     @allure.step('Проверка подтверждения заказа пользователем')
     def check_order_confirmed(self):

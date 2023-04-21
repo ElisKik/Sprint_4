@@ -1,7 +1,5 @@
 import allure
 
-from random import choice
-
 from selenium.webdriver.common.by import By
 
 from pages.base_page import BasePage
@@ -42,35 +40,28 @@ class OrderCustomerPage(BasePage):
 
     @allure.step('Ввод информации о заказчике: имя')
     def set_first_name(self, value: str):
-        self.webdriver.find_element(*self.input_first_name).send_keys(value)
+        self.send_keys(self.input_first_name, value)
 
     @allure.step('Ввод информации о заказчике: фамилия')
     def set_last_name(self, value: str):
-        self.webdriver.find_element(*self.input_last_name).send_keys(value)
+        self.send_keys(self.input_last_name, value)
 
     @allure.step('Ввод информации о заказчике: адрес')
     def set_address(self, value: str):
-        self.webdriver.find_element(*self.input_address).send_keys(value)
+        self.send_keys(self.input_address, value)
 
     @allure.step('Ввод информации о заказчике: станция метро')
     def set_random_metro_station(self):
-        self.webdriver.find_element(*self.input_metro).click()
-
-        station_elements = self.webdriver.find_elements(*self.container_metro_station)
-
-        random_metro_station_element = choice(station_elements)
-
-        self.webdriver.execute_script("arguments[0].scrollIntoView();", random_metro_station_element)
-
-        random_metro_station_element.click()
+        self.click(self.input_metro)
+        self.click_random(self.container_metro_station)
 
     @allure.step('Ввод информации о заказчике: номер телефона')
     def set_phone(self, value: str):
-        self.webdriver.find_element(*self.input_phone).send_keys(value)
+        self.send_keys(self.input_phone, value)
 
     @allure.step('Ввод информации о заказчике: клик на кнопку перехода к следующей форме')
     def click_button_next(self):
-        self.webdriver.find_element(*self.button_next).click()
+        self.click(self.button_next)
 
     @allure.step('Проверка валидности ввода: имя')
     def check_valid_first_name(self):

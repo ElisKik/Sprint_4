@@ -1,7 +1,6 @@
 import allure
 
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support import expected_conditions as EC
 
 from data.urls import Urls
 from pages.base_page import BasePage
@@ -15,29 +14,20 @@ class LandingPage(BasePage):
 
     @allure.step('Клик на кнопку Заказать')
     def click_button_order(self):
-        element = self.webdriver.find_element(*self.button_order)
-        self.wait.until(EC.element_to_be_clickable(element))
-        element.click()
+        self.click_awaited(self.button_order)
 
     @allure.step('Скролл к FAQ')
     def scroll_to_faq(self):
-        element = self.webdriver.find_element(*self.container_faq)
-        self.webdriver.execute_script("arguments[0].scrollIntoView();", element)
+        self.scroll_to(self.container_faq)
 
     @allure.step('Скролл к кнопке Заказать')
     def scroll_to_button_order(self):
-        element = self.webdriver.find_element(*self.button_order)
-        self.wait.until(EC.element_to_be_clickable(element))
-        self.webdriver.execute_script("arguments[0].scrollIntoView();", element)
+        self.scroll_to(self.button_order)
 
     @allure.step('Клик на вопрос')
     def click_question(self, text: str):
         locator = self.container_question(text)
-        element = self.webdriver.find_element(*locator)
-
-        self.wait.until(EC.element_to_be_clickable(element))
-
-        element.click()
+        self.click_awaited(locator)
 
     @allure.step('Клик на ответ')
     def check_answer(self, question_text: str, answer_text: str):
